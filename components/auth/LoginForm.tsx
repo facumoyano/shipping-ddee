@@ -7,6 +7,7 @@ import { Button } from "@radix-ui/themes";
 import { client } from "../../supabase/client";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import userStore from "@/store/userStore";
 
 const LoginForm = () => {
   const router = useRouter();
@@ -15,6 +16,8 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
+
+  const setUserStore = userStore((state) => state.setAccessToken);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -44,7 +47,7 @@ const LoginForm = () => {
         draggable: true,
         progress: undefined,
       });
-      console.log(data);
+      setUserStore(data?.session.access_token);
       router.push("/");
     } catch (error) {
       console.log(error);

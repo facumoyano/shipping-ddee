@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Theme>{children}</Theme>
+        <Theme className="flex">
+          <Sidebar />
+          <div className="p-4 w-full">
+            {children}
+          </div>
+        </Theme>
         <ToastContainer
           position="top-right"
           autoClose={5000}
@@ -32,7 +38,7 @@ export default function RootLayout({
           pauseOnFocusLoss
           draggable
           pauseOnHover
-         />
+        />
       </body>
     </html>
   );
